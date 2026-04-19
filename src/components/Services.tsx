@@ -103,7 +103,7 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
         href="/onderhoud"
         className="inline-flex items-center gap-2 text-white font-semibold group-hover:text-[#c8102e] transition-colors"
       >
-        Meer info
+        Offerte aanvragen
         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
       </Link>
     </div>
