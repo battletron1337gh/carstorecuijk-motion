@@ -1,6 +1,5 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import Script from 'next/script';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -17,45 +16,6 @@ export const metadata: Metadata = {
 export default function OccasionsPage() {
   return (
     <>
-      {/* VWE Voorraadlijst Script */}
-      <Script
-        src="//svl.autodealers.nl/jsVoorraadPlugin.ashx?did=27445&wid=96245"
-        strategy="afterInteractive"
-      />
-      <Script id="vwe-loader" strategy="afterInteractive">
-        {`
-          // Verberg loading state wanneer VWE voorraadlijst geladen is
-          (function() {
-            const checkVWE = function() {
-              const vweContainer = document.getElementById('vwe-voorraad-container');
-              const loadingEl = document.getElementById('vwe-loading');
-              
-              // Check of VWE content is geïnjecteerd
-              if (vweContainer && vweContainer.children.length > 1) {
-                if (loadingEl) loadingEl.style.display = 'none';
-                return true;
-              }
-              return false;
-            };
-            
-            // Check elke 500ms voor 10 seconden
-            let attempts = 0;
-            const interval = setInterval(function() {
-              attempts++;
-              if (checkVWE() || attempts > 20) {
-                clearInterval(interval);
-              }
-            }, 500);
-            
-            // Fallback: verberg loading na 5 seconden
-            setTimeout(function() {
-              const loadingEl = document.getElementById('vwe-loading');
-              if (loadingEl) loadingEl.style.display = 'none';
-            }, 5000);
-          })();
-        `}
-      </Script>
-      
       <Header />
       <main className="min-h-screen pt-24 lg:pt-28 bg-[#0a0a0a]">
         {/* Page Header */}
@@ -68,23 +28,14 @@ export default function OccasionsPage() {
           </div>
         </div>
 
-        {/* VWE Voorraadlijst Container */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="bg-[#1a1a1a] rounded-2xl p-8 border border-white/5">
-            {/* VWE Plugin injecteert hier de voorraadlijst */}
-            <div id="vwe-voorraad-container" className="min-h-[400px]">
-              {/* Loading state - wordt vervangen door VWE script */}
-              <div className="text-center py-16" id="vwe-loading">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-[#c8102e]/20 rounded-full mb-4 animate-pulse">
-                  <svg className="w-8 h-8 text-[#c8102e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-                  </svg>
-                </div>
-                <h2 className="text-xl font-semibold text-white mb-2">Voorraad wordt geladen</h2>
-                <p className="text-white/50">Onze occasions worden opgehaald uit ons systeem...</p>
-              </div>
-            </div>
-          </div>
+        {/* VWE Voorraadlijst via Iframe */}
+        <div className="w-full bg-white">
+          <iframe
+            src="https://carstorecuijk.nl/occasions/"
+            className="w-full min-h-[1200px] border-0"
+            title="Car Store Cuijk Occasions"
+            loading="lazy"
+          />
         </div>
 
         {/* SEO Content */}
@@ -92,11 +43,11 @@ export default function OccasionsPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <div className="grid lg:grid-cols-2 gap-12">
               <div>
-                <h2 className="text-2xl font-bold text-white mb-4">Tweedehands auto's kopen in Cuijk - Voornamelijk 1ste eigenaar</h2>
+                <h2 className="text-2xl font-bold text-white mb-4">Tweedehands auto&apos;s kopen in Cuijk - Voornamelijk 1ste eigenaar</h2>
                 <p className="text-white/60 mb-4">
-                  Bij Car Store Cuijk vindt u een ruim aanbod betrouwbare tweedehands auto's en gebruikte auto's. 
-                  Wij specialiseren ons in 1ste eigenaar autos - auto's die nieuw zijn gekocht door één eigenaar. 
-                  Van compacte stadsauto's tot ruime gezinsauto's en luxe modellen van alle merken. 
+                  Bij Car Store Cuijk vindt u een ruim aanbod betrouwbare tweedehands auto&apos;s en gebruikte auto&apos;s. 
+                  Wij specialiseren ons in 1ste eigenaar autos - auto&apos;s die nieuw zijn gekocht door één eigenaar. 
+                  Van compacte stadsauto&apos;s tot ruime gezinsauto&apos;s en luxe modellen van alle merken. 
                   Al onze 1e eigenaar autos worden grondig gecontroleerd voordat ze in de verkoop gaan.
                 </p>
                 <p className="text-white/60">
